@@ -50,5 +50,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# Json files in root directory
-*.json
+# ProjectVersion
+ProjectSettings/ProjectVersion.txt
