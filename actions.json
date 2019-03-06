@@ -72,6 +72,14 @@
       "name": "/actions/mixedreality/in/ExternalCamera",
       "type": "pose",
       "requirement": "optional"
+    },
+    {
+      "name": "/actions/object_manipulation/in/Spawn",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/object_manipulation/in/Shrink",
+      "type": "vector1"
     }
   ],
   "action_sets": [
@@ -89,6 +97,10 @@
     },
     {
       "name": "/actions/mixedreality",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/object_manipulation",
       "usage": "single"
     }
   ],
@@ -142,7 +154,9 @@
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
       "/actions/default/in/Teleport": "Teleport",
       "/actions/default/out/Haptic": "Haptic",
-      "/actions/platformer/in/Jump": "Jump"
+      "/actions/platformer/in/Jump": "Jump",
+      "/actions/object_manipulation/in/Spawn": "Spawn",
+      "/actions/object_manipulation/in/Shrink": "Shrink"
     }
   ]
 }
