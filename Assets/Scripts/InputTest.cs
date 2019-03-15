@@ -35,6 +35,18 @@ public class InputTest : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        SpawningSphere();
+        UpdatingSphereSize();
+
+    }
+
+    private void SpawningSphere()
+    {
         bool bSpawn = spawn.GetStateDown(source);
         if (bSpawn == true)
         {
@@ -51,7 +63,10 @@ public class InputTest : MonoBehaviour
                 sphere.transform.localRotation = Quaternion.identity;
             }
         }
+    }
 
+    private void UpdatingSphereSize()
+    {
         float size = shrink.GetAxis(source);
         if (size > 0.1f && sphere != null)
         {
