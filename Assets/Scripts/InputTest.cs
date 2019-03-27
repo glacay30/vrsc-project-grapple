@@ -7,6 +7,13 @@ public class InputTest : MonoBehaviour
     public SteamVR_Action_Boolean spawn;
     public SteamVR_Action_Single shrink;
 
+    private Rigidbody rb;
+    private Vector3 forceDirection;
+
+    [SerializeField] private float maxMagnitude = 20f;
+    [SerializeField] private float friction = 1f;
+    [SerializeField] private float strength = 100f;
+
     private GameObject sphere = null;
     private  SteamVR_Input_Sources source;
 
@@ -30,6 +37,8 @@ public class InputTest : MonoBehaviour
                 Debug.Log("Found device RightHand for " + ToString());
                 break;
         }
+
+        rb = gameObject.GetComponentInParent<Rigidbody>();
     }
 
 
@@ -40,6 +49,7 @@ public class InputTest : MonoBehaviour
         {
             Application.Quit();
         }
+        rb.drag = friction;
         SpawningSphere();
         UpdatingSphereSize();
 
@@ -67,15 +77,22 @@ public class InputTest : MonoBehaviour
 
     private void UpdatingSphereSize()
     {
-        float size = shrink.GetAxis(source);
-        if (size > 0.1f && sphere != null)
+        float forceStrength = shrink.GetAxis(source);
+        //forceDirection = Vector3.Normalize(transform.position - (transform.parent.transform.position + new Vector3(0f, 0.5f, 0f)));
+        forceDirection = Vector3.Normalize(transform.parent.GetChild(2).transform.position - transform.position);
+        if (forceStrength > 0.2f && rb.velocity.magnitude < maxMagnitude)
         {
-            Vector3 targetScale = new Vector3(size, size, size);
-            sphere.transform.localScale = targetScale;
+            rb.AddForce(forceDirection * forceStrength * strength);
         }
-        else if (size < 0.1f && sphere != null)
-        {
-            sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        }
+
+        //if (size > 0.1f && sphere != null)
+        //{
+        //    Vector3 targetScale = new Vector3(size, size, size);
+        //    sphere.transform.localScale = targetScale;
+        //}
+        //else if (size < 0.1f && sphere != null)
+        //{
+        //    sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        //}
     }
 }
