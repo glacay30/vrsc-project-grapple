@@ -78,7 +78,8 @@ public class InputTest : MonoBehaviour
     private void UpdatingSphereSize()
     {
         float forceStrength = shrink.GetAxis(source);
-        //forceDirection = Vector3.Normalize(transform.position - (transform.parent.transform.position + new Vector3(0f, 0.5f, 0f)));
+        //float size = shrink.GetAxis(source);
+        forceDirection = Vector3.Normalize(transform.position - (transform.parent.transform.position + new Vector3(0f, 0.5f, 0f)));
         forceDirection = Vector3.Normalize(transform.parent.GetChild(2).transform.position - transform.position);
         if (forceStrength > 0.2f && rb.velocity.magnitude < maxMagnitude)
         {
@@ -87,8 +88,8 @@ public class InputTest : MonoBehaviour
 
         //if (size > 0.1f && sphere != null)
         //{
-        //    Vector3 targetScale = new Vector3(size, size, size);
-        //    sphere.transform.localScale = targetScale;
+        //    Vector3 targetscale = new Vector3(size, size, size);
+        //    sphere.transform.localScale = targetscale;
         //}
         //else if (size < 0.1f && sphere != null)
         //{
